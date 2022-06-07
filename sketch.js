@@ -1,5 +1,5 @@
 var potatoSaver;
-var potatoSaverImg, potatoSaverIdleImg, panImg, badPanImg, potatoImg, potatoHeartImg;
+var potatoSaverImg, potatoSaverIdleImg, panImg, badPanImg, potatoImg, potatoHeartImg, groundImg;
 var panGroup, potatoGroup;
 var life = 3;
 //menu, jogo1(), jogo2(), jogo3(), jogo4();
@@ -13,6 +13,7 @@ function preload(){
   badPanImg = loadImage("./assets/bad pan.png");
   potatoImg = loadImage("./assets/potato.png");
   potatoHeartImg = loadImage("./assets/potatoHeart.png");
+  groundImg = loadImage("./assets/grass.png");
 }
 
 function setup() {
@@ -27,7 +28,7 @@ function setup() {
 
 function draw() {
   // limpa a tela
-  background('black');
+  background(groundImg);
   if (keyDown("left")){
     potatoSaver.x -= 10;
     potatoSaver.changeAnimation("jogador andando");
@@ -42,6 +43,11 @@ function draw() {
   gerarPanelas(100);
   dispararBatatas();
   mostrarVida(life);
+
+  if (panGroup.y > 0){
+    life =- 1;
+  }
+  console.log(life);
 
   drawSprites();
 }
