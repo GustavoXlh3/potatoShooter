@@ -44,7 +44,8 @@ function draw() {
   dispararBatatas();
   mostrarVida(life);
 
-  if (panGroup.y > 0){
+  //nao lembro como acessa a posiçao da panela do grupo
+  if (panGroup.y < 0){
     life =- 1;
   }
   console.log(life);
