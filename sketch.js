@@ -43,12 +43,13 @@ function draw() {
   gerarPanelas(100);
   dispararBatatas();
   mostrarVida(life);
+  transformarPanelas(100);
 
   //nao lembro como acessa a posiçao da panela do grupo
   if (panGroup.y < 0){
     life =- 1;
   }
-  console.log(life);
+  console.log(panGroup.size());
 
   drawSprites();
 }
@@ -57,14 +58,28 @@ function gerarPanelas(x){
   if (frameCount % x == 0){
    var panela = createSprite(random(0,800), 610, 10, 10);
    panela.addImage("panela", panImg);
+   panela.addImage("panela do mal", badPanImg);
    panela.velocityY = -5;
    panela.lifetime = -width/panela.velocityY;
    panGroup.add(panela);
   }
 }
 
-function transformarPanelas(){
+function transformarPanelas(x){
+  if(frameCount % x == 0) {
+    if(panGroup.size() > 0) {
+      var index = Math.round(random(0, panGroup.size() - 1));
+      if(panGroup[index]) {
+        panGroup[index].changeAnimation("panela do mal");
+      }
+    }
+  }
 
+  setTimeout(() => {
+    if(panGroup[index]) {
+      panGroup[index].changeAnimation("panela");
+    }
+  }, 2000);
 }
 
 function dispararBatatas(){
